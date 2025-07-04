@@ -1,0 +1,25 @@
+news_prompt: "There are a number of news sources listed below (like the Financial Times, INVESTORS BUSINESS DAILY, USA Today, etc.). \nUnderneath each source are summarized news headlines that start with a dash (\"-\").\n\nFor each news headline starting with a dash (\"-\"), summarize it as a single sentence, capturing the essence of what was said. \nMaintain the news section headings as shown in the provided format. \nEnsure the final output follows this structure, where the beginning of each news summary has a couple of words in bold, serving as a mini title:\n\n**NEWS SOURCE NAME**\n- **Mini Title:** Headline summary 1\n- **Mini Title:** Headline summary 2\n- **Mini Title:** Headline summary 3\n"
+grok_prompts:
+    - Provide me a digest of world news in the last 24 hours.
+    - what are the key stories and trends from recent sources
+    - what are todays headlines
+    - what are todays business, stock market, and wall street key stories and trends from recent sources
+    - what are todays business, stock market, and wall street headlines
+    - what numbers or economic data or announcements for today are of importance to the us stock market and I should be aware of
+    - what are todays tech and ai and openai key stories and trends from recent sources
+    - what are todays tech and ai and openai headlines
+    - what are todays bitcoin and crypto key stories and trends from recent sources
+    - what are todays bitcoin and crypto headlines
+    - what are the key stories and trends from recent sources from today right now
+    - what are the trending headlines right now
+    - what are todays key stories and trends from recent sources related to puerto rico
+    - what are todays headlines related to puerto rico
+    - create a end-of-the-day summary for the most recent day the market was open based on major financial news, key market movements, and economic indicators
+    - create a end-of-the-week summary for the most recent week the market was open based on major financial news, key market movements, and economic indicators
+    - what numbers or economic data or announcements for next week are of importance to the us stock market and I should be aware of
+    - track the performance of Apple, Tesla, Microsoft, and Nvidia during the most recent trading session, including price change, volume, and key metrics.    Also compare the performance of these stocks to the general performance of their respective sectors
+    - |
+      Analyze the latest news headlines and social media mentions of Tesla and summarize the public sentiment as positive, negative, or neutral. Provide the most relevant links
+      **Extensions:**
+      - Break down sentiment classification by media source
+      - Identify sentiment of the latest product launches, feature updates, and earnings report, if applicable
