@@ -157,7 +157,7 @@ func streamOpenAIAPI(w io.Writer, flusher http.Flusher, prompt string) error {
 	}
 
 	payload := map[string]any{
-		"model": "gpt-4o",
+		"model": "gpt-4.1",
 		"messages": []map[string]string{
 			{"role": "system", "content": "You are a concise news-summary assistant."},
 			{"role": "user", "content": prompt},
@@ -239,7 +239,7 @@ func streamOpenAIAPI(w io.Writer, flusher http.Flusher, prompt string) error {
 }
 
 // -----------------------------------------------------------------------------
-//  GROK-3 ENDPOINT
+//  GROK-4 ENDPOINT
 // -----------------------------------------------------------------------------
 
 func runGrokPromptsHandler(w http.ResponseWriter, r *http.Request) {
@@ -288,7 +288,7 @@ func streamGrokAPI(w io.Writer, flusher http.Flusher, message string) error {
 	}
 
 	payload := map[string]any{
-		"model": "grok-3-latest",
+		"model": "grok-4-latest",
 		"messages": []map[string]string{
 			{"role": "user", "content": message},
 		},

@@ -1,7 +1,7 @@
 # News Routine
 
 A lightweight **news-digestion and market-prep dashboard** written in Go 1.23.
-News Routine streams headlines through OpenAI GPT-4o, Grok-3, and Perplexity APIs, giving you concise, formatted summaries that you can copy, toggle, and store locally inside the browser.
+News Routine streams headlines through OpenAI GPT-4o, Grok-4, and Perplexity APIs, giving you concise, formatted summaries that you can copy, toggle, and store locally inside the browser.
 
 <p align="center">
   <img src="static/screenshot-dark.png" alt="News Routine screenshot" width="800"/>
@@ -28,7 +28,7 @@ News Routine streams headlines through OpenAI GPT-4o, Grok-3, and Perplexity API
 | Tab                | What it does                                                                                    |
 | ------------------ | ----------------------------------------------------------------------------------------------- |
 | **News Summaries** | Paste raw tradethenews e-mail newsletters and get instant one-sentence summaries grouped by source.          |
-| **Grok Prompts**   | Run pre-curated “what happened today?” prompts against **x.ai Grok-3** and stream answers live. |
+| **Grok Prompts**   | Run pre-curated “what happened today?” prompts against **x.ai Grok-4** and stream answers live. |
 | **Settings**       | Edit `settings.yaml` (news prompt + Grok prompt list) right in the browser.                     |
 | **PPLX**           | Fire Perplexity AI queries, including a convenience “takeaways” helper for SEC filings.         |
 
@@ -98,7 +98,7 @@ It is scaffolded from **`env.example`** and read at startup via `github.com/joho
 | Variable         | Description                                |
 | ---------------- | ------------------------------------------ |
 | `OPENAI_API_KEY` | Key for Chat Completions (model `gpt-4o`). |
-| `GROK_API_KEY`   | x.ai Grok-3 key (`grok-3-latest`).         |
+| `GROK_API_KEY`   | x.ai Grok-4 key (`grok-4-latest`).         |
 | `PPLX_API_KEY`   | Perplexity key (`sonar-pro`).              |
 
 ---

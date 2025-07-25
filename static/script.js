@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const ctx = document.getElementById('pplx-takeaways-text').value.trim();
       if (ctx) {
         queries.push(
-          `give the main takeaways in markdown about todays ${ctx} . Give you best guess of how the stock will react to this filing from the perspective of a day trader
+          `give the main takeaways in markdown about the following: ${ctx} . Give you best guess of how the stock will react to this filing from the perspective of a day trader
 `
         );
       }
