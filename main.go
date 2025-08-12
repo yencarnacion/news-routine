@@ -157,7 +157,7 @@ func streamOpenAIAPI(w io.Writer, flusher http.Flusher, prompt string) error {
 	}
 
 	payload := map[string]any{
-		"model": "gpt-4.1",
+		"model": "gpt-5-mini",
 		"messages": []map[string]string{
 			{"role": "system", "content": "You are a concise news-summary assistant."},
 			{"role": "user", "content": prompt},

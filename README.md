@@ -1,7 +1,7 @@
 # News Routine
 
 A lightweight **news-digestion and market-prep dashboard** written in Go 1.23.
-News Routine streams headlines through OpenAI GPT-4o, Grok-4, and Perplexity APIs, giving you concise, formatted summaries that you can copy, toggle, and store locally inside the browser.
+News Routine streams headlines through OpenAI GPT-5, Grok-4, and Perplexity APIs, giving you concise, formatted summaries that you can copy, toggle, and store locally inside the browser.
 
 <p align="center">
   <img src="static/screenshot-dark.png" alt="News Routine screenshot" width="800"/>
@@ -97,7 +97,7 @@ It is scaffolded from **`env.example`** and read at startup via `github.com/joho
 
 | Variable         | Description                                |
 | ---------------- | ------------------------------------------ |
-| `OPENAI_API_KEY` | Key for Chat Completions (model `gpt-4o`). |
+| `OPENAI_API_KEY` | Key for Chat Completions (model `gpt-5`). |
 | `GROK_API_KEY`   | x.ai Grok-4 key (`grok-4-latest`).         |
 | `PPLX_API_KEY`   | Perplexity key (`sonar-pro`).              |
 
