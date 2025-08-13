@@ -1,7 +1,7 @@
-# News Routine
+# Morning Routine
 
 A lightweight **news-digestion and market-prep dashboard** written in Go 1.23.
-News Routine streams headlines through OpenAI GPT-5, Grok-4, and Perplexity APIs, giving you concise, formatted summaries that you can copy, toggle, and store locally inside the browser.
+Morning Routine streams headlines through OpenAI GPT-5, Grok-4, and Perplexity APIs, giving you concise, formatted summaries that you can copy, toggle, speed-read, and store locally inside the browser.
 
 <p align="center">
   <img src="static/screenshot-dark.png" alt="News Routine screenshot" width="800"/>
@@ -18,6 +18,7 @@ News Routine streams headlines through OpenAI GPT-5, Grok-4, and Perplexity APIs
 5. [Usage](#usage)
 6. [Project structure](#project-structure)
 7. [Troubleshooting](#troubleshooting)
+8. [Credits](#credits)
 8. [Contributing](#contributing)
 9. [License](#license)
 
@@ -27,7 +28,7 @@ News Routine streams headlines through OpenAI GPT-5, Grok-4, and Perplexity APIs
 
 | Tab                | What it does                                                                                    |
 | ------------------ | ----------------------------------------------------------------------------------------------- |
-| **News Summaries** | Paste raw tradethenews e-mail newsletters and get instant one-sentence summaries grouped by source.          |
+| **News Summaries** | Paste raw tradethenews e-mail newsletters and get instant one-sentence summaries grouped by source. |
 | **Grok Prompts**   | Run pre-curated “what happened today?” prompts against **x.ai Grok-4** and stream answers live. |
 | **Settings**       | Edit `settings.yaml` (news prompt + Grok prompt list) right in the browser.                     |
 | **PPLX**           | Fire Perplexity AI queries, including a convenience “takeaways” helper for SEC filings.         |
@@ -36,7 +37,7 @@ Built-in QoL highlights:
 
 * HTTP streaming for **zero-latency** partial results.
 * LocalStorage caching so your last run survives reloads.
-* Copy-as-Markdown & raw/HTML toggle buttons.
+* Copy-as-Markdown, raw/HTML toggle buttons, and an inline **Speed Read** mode (default 200 WPM) with ORP highlighting and WPM/progress controls.
 * One-click launch: `go run main.go settings.go`.
 
 ---
@@ -118,7 +119,7 @@ It is scaffolded from **`env.example`** and read at startup via `github.com/joho
 ## Project structure
 
 ```
-news-routine/
+morning-routine-02/
 ├── main.go             # HTTP server + streaming endpoints
 ├── settings.go         # YAML (de)serialization helpers
 ├── go.mod / go.sum     # Dependencies (godotenv, yaml.v3)
@@ -148,6 +149,14 @@ For verbose logs, set:
 ```bash
 export GODEBUG=http2debug=2     # HTTP/2 transport
 ```
+
+---
+
+## Credits
+
+The inline speed-reading widget is inspired by the open-source **Glance-Bookmarklet** project by @Miserlou. See the repository: [Glance-Bookmarklet](https://github.com/Miserlou/Glance-Bookmarklet).
+
+Many thanks to the authors and contributors of that project for the original idea and approach.
 
 ---
 
