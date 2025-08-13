@@ -30,18 +30,14 @@
                 <h2 class="h4 mb-3">News Summaries</h2>
                 <p>Paste the email content below:</p>
                 <textarea id="email-content" rows="10" class="form-control mb-3"></textarea>
-
                 <p>Prompt:</p>
                 <pre id="news-prompt" class="bg-light p-3 rounded"></pre>
-
                 <button id="generate-btn" class="btn btn-primary">Generate Summaries</button>
                 <button id="copy-btn" class="btn btn-secondary ms-2 d-none">Copy Markdown</button>
                 <button id="toggle-btn" class="btn btn-secondary ms-2 d-none">Toggle Raw / Formatted</button>
-
                 <div id="summaries" class="mt-4"></div>
                 <pre id="raw-markdown" class="bg-light p-3 mt-3 rounded" style="display:none; white-space: pre-wrap"></pre>
             </div>
-
             <!-- GROK TAB -->
             <div class="tab-pane fade" id="grok">
                 <h2 class="h4 mb-3">Grok Prompts</h2>
@@ -49,54 +45,23 @@
                 <button id="run-grok-btn" class="btn btn-primary">Run Selected Prompts</button>
                 <div id="grok-responses" class="mt-4"></div>
             </div>
-
             <!-- SETTINGS TAB -->
             <div class="tab-pane fade" id="settings">
                 <h2 class="h4 mb-3">Settings</h2>
                 <textarea id="settings-yaml" rows="10" class="form-control mb-3"></textarea>
                 <button id="save-settings-btn" class="btn btn-primary">Save Settings</button>
             </div>
-
             <!-- PPLX TAB -->
             <div class="tab-pane fade" id="pplx">
                 <h2 class="h4 mb-3">Perplexity Queries</h2>
                 <div id="pplx-prompts" class="mb-3">
-                    <!-- New “takeaways” option -->
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" id="pplx-takeaways-checkbox">
-                        <label class="form-check-label" for="pplx-takeaways-checkbox">
-                            Give the main takeaways in markdown about the following: ... Give your best guess of how the stock will react to this filing from the perspective of a day trader. include the intrument ticker if there is one and you know it.
-
-                        </label>
-                    </div>
-                    <textarea
-                        id="pplx-takeaways-text"
-                        class="form-control mt-2 mb-3"
-                        rows="3"
-                        placeholder="Enter context here"
-                        disabled
-                    ></textarea>
-
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" id="pplx-static" value="Prepare me for when markets open today?">
-                        <label class="form-check-label" for="pplx-static">
-                            Prepare me for when markets open today?
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="pplx-custom-checkbox">
-                        <label class="form-check-label" for="pplx-custom-checkbox">
-                            Custom query:
-                        </label>
-                    </div>
-                    <textarea id="pplx-custom-text" class="form-control mt-2" rows="3" placeholder="Enter your query here" disabled></textarea>
+                    <!-- Dynamically generated checkboxes and textareas will go here -->
                 </div>
                 <button id="run-pplx-btn" class="btn btn-primary">Run Perplexity Queries</button>
                 <div id="pplx-responses" class="mt-4"></div>
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
