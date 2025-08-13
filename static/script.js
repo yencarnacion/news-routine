@@ -66,6 +66,48 @@ document.addEventListener('DOMContentLoaded', () => {
   let lastFullText = '';
   let rawVisible = false;
   let pplxQueries = []; // Store for run logic
+  // Component to view markdown with toggle + copy for raw
+  function createMarkdownViewer (titleText) {
+    const root = document.createElement('div');
+    const header = document.createElement('div');
+    header.className = 'd-flex align-items-center justify-content-between';
+    const title = document.createElement('h3');
+    title.textContent = titleText;
+    const btns = document.createElement('div');
+    const toggle = document.createElement('button');
+    toggle.className = 'btn btn-sm btn-outline-secondary me-2';
+    toggle.textContent = 'Toggle Raw / Formatted';
+    const copy = document.createElement('button');
+    copy.className = 'btn btn-sm btn-outline-secondary';
+    copy.textContent = 'Copy Raw Markdown';
+    btns.appendChild(toggle);
+    btns.appendChild(copy);
+    header.appendChild(title);
+    header.appendChild(btns);
+    const formatted = document.createElement('div');
+    const pre = document.createElement('pre');
+    pre.style.display = 'none';
+    pre.style.whiteSpace = 'pre-wrap';
+    root.appendChild(header);
+    root.appendChild(formatted);
+    root.appendChild(pre);
+    let showRaw = false;
+    toggle.addEventListener('click', () => {
+      showRaw = !showRaw;
+      pre.style.display = showRaw ? 'block' : 'none';
+      formatted.style.display = showRaw ? 'none' : 'block';
+      toggle.textContent = showRaw ? 'Toggle Formatted View' : 'Toggle Raw / Formatted';
+    });
+    copy.addEventListener('click', () => copyToClipboard(pre.textContent));
+    return {
+      root,
+      setTitle: (t) => { title.textContent = t; },
+      setMarkdown: (md) => {
+        formatted.innerHTML = marked.parse(md || '');
+        pre.textContent = md || '';
+      }
+    };
+  }
   //--------------------------------------------------------------------------
   // 1) Load settings.yaml so the UI starts populated
   //--------------------------------------------------------------------------
@@ -199,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   });
   //--------------------------------------------------------------------------
-  // 4) GROK PROMPTS (unchanged logic)
+  // 4) GROK PROMPTS (now with raw toggle/copy per block)
   //--------------------------------------------------------------------------
   const runGrokBtn = document.getElementById('run-grok-btn');
   if (runGrokBtn) runGrokBtn.addEventListener('click', () => {
@@ -218,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let buffer = '';
         let currentPrompt = '';
         let currentResponse = '';
-        let currentDiv = null;
+        let currentBlock = null;
         return pump();
         function pump () {
           return reader.read().then(({ done, value }) => {
@@ -232,21 +274,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 const event = JSON.parse(line);
                 switch (event.type) {
                   case 'prompt':
-                    if (currentDiv) {
-                      currentDiv.innerHTML = `<h3>Prompt: ${currentPrompt}</h3>` + marked.parse(currentResponse);
-                    }
                     currentPrompt = event.content;
                     currentResponse = '';
-                    currentDiv = document.createElement('div');
-                    responsesDiv.appendChild(currentDiv);
+                    currentBlock = createMarkdownViewer('Prompt: ' + currentPrompt);
+                    responsesDiv.appendChild(currentBlock.root);
                     break;
                   case 'chunk':
                     currentResponse += event.content;
-                    currentDiv.innerHTML = `<h3>Prompt: ${currentPrompt}</h3>` + marked.parse(currentResponse);
+                    if (currentBlock) currentBlock.setMarkdown(currentResponse);
                     break;
                   case 'end':
-                    currentDiv.innerHTML = `<h3>Prompt: ${currentPrompt}</h3>` + marked.parse(currentResponse);
-                    currentDiv = null;
+                    currentBlock = null;
                     break;
                   case 'error':
                     responsesDiv.appendChild(document.createTextNode(`Error: ${event.content}`));
@@ -310,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
         let buffer = '';
-        let currentDiv = null, currentQuery = '', currentResponse = '';
+        let currentBlock = null, currentQuery = '', currentResponse = '';
         return (function pump() {
           return reader.read().then(({ done, value }) => {
             if (done) return;
@@ -320,20 +358,19 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let line of lines) {
               if (!line.trim()) continue;
               const event = JSON.parse(line);
-              switch (event.type) {
+               switch (event.type) {
                 case 'query':
-                  if (currentDiv) currentDiv.innerHTML = `<h3>Query: ${currentQuery}</h3>` + marked.parse(currentResponse);
                   currentQuery = event.content;
                   currentResponse = '';
-                  currentDiv = document.createElement('div');
-                  responsesDiv.appendChild(currentDiv);
+                  currentBlock = createMarkdownViewer('Query: ' + currentQuery);
+                  responsesDiv.appendChild(currentBlock.root);
                   break;
                 case 'chunk':
                   currentResponse += event.content;
-                  currentDiv.innerHTML = `<h3>Query: ${currentQuery}</h3>` + marked.parse(currentResponse);
+                  if (currentBlock) currentBlock.setMarkdown(currentResponse);
                   break;
                 case 'end':
-                  currentDiv = null;
+                  currentBlock = null;
                   break;
               }
             }
