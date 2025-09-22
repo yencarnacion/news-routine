@@ -288,7 +288,7 @@ func streamGrokAPI(w io.Writer, flusher http.Flusher, message string) error {
 	}
 
 	payload := map[string]any{
-		"model": "grok-4-latest",
+		"model": "grok-4-fast",
 		"messages": []map[string]string{
 			{"role": "user", "content": message},
 		},
