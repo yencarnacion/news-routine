@@ -65,3 +65,60 @@ pplx_queries:
       prompt: ""
       placeholder: ""
       label: Custom query
+    - type: template
+      prompt: |-
+        for this conversation i want you to use your expert daytrading, investing and wall street knowledge.
+        apply the appropriate prompt to the press release below:
+        ---
+        **Prompt:**
+        Analyze the following press release(s) about private placements. Your task is to:
+        1. **Deal Structure**
+           * Summarize the financial terms (amount raised, securities offered, pricing, conversion terms, discounts, warrants, in-kind contributions, etc.).
+           * Note any unusual or complex features (crypto components, reverse splits, excessive dilution, etc.).
+        2. **Shareholder Impact**
+           * Assess the potential dilution impact.
+           * Evaluate whether the capital raised strengthens or weakens the company’s balance sheet.
+           * Consider strategic alignment (does this support the core business, or is it a distraction?).
+           * Identify risks (regulatory, execution, speculative assets, etc.).
+        3. **Comparative Analysis**
+           * Benchmark against typical private placement terms in the public markets.
+           * Highlight whether insiders, strategic partners, or credible institutions are involved.
+        4. **Final Evaluation**
+           * Provide a clear **judgment**: is this private placement good, neutral, or bad for existing shareholders?
+           * Assign a **score from -10 to 10**, where:
+             * **-10** = absolute worst possible deal (max dilution, terrible terms, no shareholder value)
+             * **0** = neutral deal (balanced, neither harmful nor beneficial)
+             * **10** = absolute best possible deal (non-dilutive, highly accretive, strategically aligned).
+        Then, provide the final answer twice (once for shareholders and another for stock reaction) in this format:
+        **Verdict:** [Good / Neutral / Bad]
+        **Score:** [X out of -10 to 10]
+        **Reasoning:** [Short, clear justification in plain English]
+        ---
+        **Prompt:**
+        Analyze the following press release about an **offering** of common stock. Your task is to:
+        1. **Deal Structure**
+           * Summarize the offering size, price per share, number of shares, and gross proceeds.
+           * Note whether the company or selling shareholders are offering the shares.
+           * Identify the underwriters and any over-allotment/greenshoe options.
+        2. **Shareholder Impact**
+           * Assess dilution to existing shareholders (compare offering size to current float/market cap if provided).
+           * Evaluate whether the offering strengthens the balance sheet (cash runway, debt repayment, R&D funding, etc.).
+           * Consider whether the use of proceeds is clear and aligned with the company’s core business strategy.
+           * Identify risks: offering price discount, pressure on share price, or repeated capital raises.
+        3. **Comparative Analysis**
+           * Benchmark terms vs. typical underwritten offerings (discount size, underwriter quality, deal size relative to market cap).
+           * Consider whether the offering was done opportunistically (high valuation window) or out of necessity (cash crunch).
+        4. **Final Evaluation**
+           * Provide a clear **judgment**: good, neutral, or bad for shareholders.
+           * Assign a **score from -10 to 10**, where:
+             * **-10** = extremely harmful (highly dilutive, bad timing, weak terms)
+             * **0** = neutral (reasonable dilution, standard terms, no major positives or negatives)
+             * **10** = extremely beneficial (minimal dilution, strong balance sheet impact, strategically accretive).
+        Then, provide the final answer twice (once for shareholders and another for stock reaction) in this format:
+        **Verdict:** [Good / Neutral / Bad]
+        **Score:** [X out of -10 to 10]
+        **Reasoning:** [Short, plain-English justification]
+        ---
+        INPUT: {{page}} (This may include site chrome, menus, and other noise.)
+      placeholder: page
+      label: offering or private placement
